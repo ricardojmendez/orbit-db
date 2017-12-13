@@ -10,8 +10,16 @@
   minified distribution builds (in '../lib')
  */
 
+// Import IPFS module
 const IPFS = require('ipfs')
-const OrbitDB = require('../../../src/OrbitDB')
+
+// Import OrbitDB module from 'orbit-db', eg. directory to its package.json
+import { OrbitDB } from '../../../' 
+
+// When 'orbit-db' was installed from npm, use with:
+// import { OrbitDB } from 'orbit-db' 
+
+// Example main code
 const example = require('../example')
 
 // Call the start function and pass in the 

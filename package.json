@@ -11,10 +11,8 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "browser": {
-    "fs-pull-blob-store": "idb-pull-blob-store"
-  },
   "main": "src/OrbitDB.js",
+  "browser": "dist/orbitdb.js",
   "dependencies": {
     "level": "^2.1.0",
     "logplease": "^1.2.14",
@@ -49,7 +47,8 @@
     "examples:node": "node examples/eventlog.js",
     "examples:browser": "open examples/browser/browser.html",
     "test": "mocha",
-    "build": "npm run build:es5 && npm run build:dist && npm run build:examples",
+    "build": "npm run build:es5 && npm run build:browser && npm run build:dist && npm run build:examples",
+    "build:browser": "webpack --config conf/webpack.browser.config.js --sort-modules-by size",
     "build:examples": "webpack --config conf/webpack.example.config.js --sort-modules-by size",
     "build:dist": "webpack --config conf/webpack.config.js --sort-modules-by size && cp dist/orbitdb.min.js examples/browser/lib/orbitdb.min.js",
     "build:debug": "webpack --config conf/webpack.debug.config.js --sort-modules-by size && cp dist/orbitdb.js examples/browser/lib/orbitdb.min.js",

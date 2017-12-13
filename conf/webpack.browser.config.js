@@ -1,39 +1,35 @@
 'use strict'
 
 const path = require('path')
-const webpack = require('webpack')
 const Uglify = require('uglifyjs-webpack-plugin')
 
-const uglifyOptions = {
-  uglifyOptions: {
-    mangle: false,
-    compress: false,
-  },
-}
-
 module.exports = {
-  entry: './examples/browser/browser-webpack-example/index.js',
+  entry: './src/OrbitDB.js',
   output: {
-    filename: './examples/browser/browser-webpack-example/bundle.js'
+    libraryTarget: 'this',
+    library: 'OrbitDB',
+    filename: './dist/orbitdb.js'
   },
   target: 'web',
   devtool: 'none',
+  externals: {
+    fs: '{}',
+    mkdirp: '{}',
+  },
   node: {
-    Buffer: true,
+    console: false,
+    Buffer: true
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
-    new Uglify(uglifyOptions),
   ],
   resolve: {
     modules: [
       'node_modules',
       path.resolve(__dirname, '../node_modules')
     ],
+    alias: {
+      leveldown: 'level-js',
+    },
   },
   resolveLoader: {
     modules: [
